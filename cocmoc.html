@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cột mốc — Huỳnh Hữu Phát</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+        .icon {
+            height: 30px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #f9f7f4;
+            --surface: #ffffff;
+            --border: #e8e2db;
+            --text: #2e2a26;
+            --muted: #9a9289;
+            --accent: #b8a99a;
+            --nav-bg: #e8e2db;
+            --nav-hover: #ddd6cc;
+            --card-bg: #dce8f0;
+            --avatar-bg: #c9bfb4;
+            --line: #b0c8d8;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-weight: 300;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 2.5rem;
+        }
+
+        .logo-box {
+            background: #eee8e0;
+            color: var(--text);
+            font-family: 'Bodoni MT', 'Times New Roman', serif;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            padding: 0.4rem 1.2rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .icon-pill {
+            background: #eee8e0;
+            color: var(--muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .social-links {
+            margin-left: auto;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+            .social-links a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.2s;
+                text-decoration: none;
+            }
+
+                .social-links a:hover {
+                    background: var(--nav-hover);
+                }
+
+        /* ─── NAV ─── */
+        nav {
+            width: 100%;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+            nav > a, .nav-item > span {
+                font-weight: 700;
+                font-family: Arial, sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--text);
+                text-decoration: none;
+                font-size: 1rem;
+                letter-spacing: 0.06em;
+                padding: 0.9rem 1.8rem;
+                transition: background 0.15s;
+                cursor: pointer;
+                white-space: nowrap;
+            }
+
+                nav > a:hover, .nav-item:hover > span {
+                    background: var(--nav-hover);
+                }
+
+                nav > a.active {
+                    background: var(--surface);
+                    position: relative;
+                }
+
+                    nav > a.active::after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        height: 2px;
+                        background: var(--accent);
+                    }
+
+        .nav-item {
+            position: relative;
+        }
+
+            .nav-item > span::after {
+                margin-left: 0.3rem;
+                font-size: 0.8rem;
+                color: var(--muted);
+            }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top: none;
+            min-width: 140px;
+            z-index: 100;
+        }
+
+        .nav-item:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--muted);
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+            padding: 0.55rem 1.2rem;
+            text-decoration: none;
+            transition: background 0.15s, color 0.15s;
+            font-weight: 400;
+        }
+
+            .dropdown a:hover {
+                background: var(--bg);
+                color: var(--text);
+            }
+
+        /* ─── MAIN ─── */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+        }
+
+        .page-label {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--text);
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* ─── TIMELINE ─── */
+        .timeline {
+            position: relative;
+        }
+
+            /* Đường kẻ dọc giữa */
+            .timeline::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 1.5px;
+                background: black;
+            }
+
+        /* ─── YEAR LABEL ─── */
+        .year-label {
+            position: relative;
+            text-align: center;
+            margin: 2.5rem 0 1.5rem;
+            z-index: 2;
+        }
+
+            .year-label span {
+                display: inline-block;
+                background: var(--bg);
+                padding: 0.2rem 1rem;
+                font-family: 'Times New Roman', serif;
+                font-size: 1rem;
+                font-weight: 400;
+                color: var(--text);
+                letter-spacing: 0.1em;
+                border: 1px solid var(--border);
+                border-radius: 20px;
+            }
+
+        /* ─── TIMELINE ITEM ─── */
+        .tl-item {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            margin-bottom: 2.2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+            .tl-item.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Item bên TRÁI */
+            .tl-item.left {
+                flex-direction: row;
+                justify-content: flex-end;
+                padding-right: calc(50% + 2rem);
+            }
+
+            /* Item bên PHẢI */
+            .tl-item.right {
+                flex-direction: row;
+                justify-content: flex-start;
+                padding-left: calc(50% + 2rem);
+            }
+
+        /* ─── DATE BADGE ─── */
+        .tl-date {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.72rem;
+            color: var(--muted);
+            background: var(--bg);
+            padding: 0.15rem 0.4rem;
+            white-space: nowrap;
+            letter-spacing: 0.03em;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        /* Đường ngang nối dot → card */
+        .tl-item.left .tl-connector {
+            position: absolute;
+            right: calc(50%);
+            top: 50%;
+            transform: translateY(-50%);
+            height: 1px;
+            width: 2rem;
+            background: var(--line);
+        }
+
+        .tl-item.right .tl-connector {
+            position: absolute;
+            left: calc(50%);
+            top: 50%;
+            transform: translateY(-50%);
+            height: 1px;
+            width: 2rem;
+            background: var(--line);
+        }
+
+        /* ─── CARD ─── */
+        .tl-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 220px;
+            flex-shrink: 0;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s, transform 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+            .tl-card:hover {
+                box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+                transform: translateY(-2px);
+            }
+
+        .tl-card-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #c5dce8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+            .tl-card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .img-ph {
+            font-size: 0.7rem;
+            color: #7aa3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .tl-card-body {
+            padding: 0.55rem 0.8rem 0.65rem;
+            text-align: center;
+        }
+
+        .tl-card-title {
+            font-family: 'Times New Roman', serif;
+            font-size: 0.85rem;
+            color: var(--text);
+            font-weight: 400;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 640px) {
+            main {
+                padding: 2rem 1rem 4rem;
+            }
+
+            header {
+                padding: 0.75rem 1rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .year-label {
+                text-align: left;
+                padding-left: 50px;
+            }
+
+            .tl-item.left, .tl-item.right {
+                flex-direction: column;
+                padding-left: 55px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+
+            .tl-dot {
+                left: 20px;
+            }
+
+            .tl-date {
+                left: 20px;
+                transform: translate(0, -150%);
+                font-size: 0.65rem;
+            }
+
+            .tl-item.left .tl-connector,
+            .tl-item.right .tl-connector {
+                display: none;
+            }
+
+            .tl-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="logo-box">HỮU PHÁT</div>
+        <div class="icon-pill">icon</div>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <img class="icon" src="icon face.png" />
+            </a>
+            <a href="https://threads.net" target="_blank" aria-label="Threads">
+                <img class="icon" src="Picture1.jpg" />
+            </a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                <img class="icon" src="icon ig.png" />
+            </a>
+        </div>
+    </header>
+
+    <!-- ═══ NAV ═══ -->
+    <nav>
+        <a href="index.html">Trang chủ</a>
+        <div class="nav-item">
+            <span>Đời sống</span>
+            <div class="dropdown">
+                <a href="Love.html">Love</a>
+                <a href="Friend.html">Friends</a>
+                <a href="Pet.html">Pet</a>
+            </div>
+        </div>
+        <a href="mylife.html">My life</a>
+        <a href="contact.html" class="active">Cột mốc</a>
+    </nav>
+
+    <!-- ═══ MAIN ═══ -->
+    <main>
+        <h1 class="page-label">Cột mốc trong cuộc sống</h1>
+
+        <div class="timeline">
+
+            <!-- ══ NĂM 2005 ══ -->
+            <div class="year-label"><span>2005</span></div>
+
+            <div class="tl-item right">
+                <div ></div>
+                <div class="tl-date">1/1/2005</div>
+                <div class="tl-connector"></div>
+                <a href="#" class="tl-card">
+                    <div class="tl-card-img">
+                        <span class="img-ph">
+                            <img src="#" />
+                        </span>
+                    </div>
+                    <div class="tl-card-body"><div class="tl-card-title">title</div></div>
+                </a>
+            </div>
+
+            <div class="tl-item left">
+                <div ></div>
+                <div class="tl-date">1/1/2005</div>
+                <div class="tl-connector"></div>
+                <a href="#" class="tl-card">
+                    <div class="tl-card-img">
+                        <span class="img-ph">
+                            <img src="#" />
+                        </span>
+                    </div>
+                    <div class="tl-card-body"><div class="tl-card-title">title</div></div>
+                </a>
+            </div>
+
+            <div class="tl-item right">
+                <div ></div>
+                <div class="tl-date">1/1/2005</div>
+                <div class="tl-connector"></div>
+                <a href="#" class="tl-card">
+                    <div class="tl-card-img">
+                        <span class="img-ph">
+                            <img src="#" />
+                        </span>
+                    </div>
+                    <div class="tl-card-body"><div class="tl-card-title">title</div></div>
+                </a>
+            </div>
+
+            <div class="tl-item left">
+                <div ></div>
+                <div class="tl-date">1/1/2005</div>
+                <div class="tl-connector"></div>
+                <a href="#" class="tl-card">
+                    <div class="tl-card-img">
+                        <span class="img-ph">
+                            <img src="#" />
+                        </span>
+                    </div>
+                    <div class="tl-card-body"><div class="tl-card-title">title</div></div>
+                </a>
+            </div>
+
+            <div class="tl-item right">
+                <div ></div>
+                <div class="tl-date">1/1/2005</div>
+                <div class="tl-connector"></div>
+                <a href="#" class="tl-card">
+                    <div class="tl-card-img">
+                        <span class="img-ph">
+                            <img src="#" />
+                        </span>
+                    </div>
+                    <div class="tl-card-body"><div class="tl-card-title">title</div></div>
+                </a>
+            </div>
+
+            <!-- ══ NĂM 2006 ══ -->
+            <div class="year-label"><span>2006</span></div>
+
+            <div class="tl-item left">
+                <div ></div>
+                <div class="tl-date">3/5/2006</div>
+                <div class="tl-connector"></div>
+                <a href="#" class="tl-card">
+                    <div class="tl-card-img">
+                        <span class="img-ph">
+                            <img src="#" />
+                        </span>
+                    </div>
+                    <div class="tl-card-body"><div class="tl-card-title">title</div></div>
+                </a>
+            </div>
+
+            <div class="tl-item right">
+                <div ></div>
+                <div class="tl-date">9/9/2006</div>
+                <div class="tl-connector"></div>
+                <a href="#" class="tl-card">
+                    <div class="tl-card-img">
+                        <span class="img-ph">
+                            <img src="#" />
+                        </span>
+                    </div>
+                    <div class="tl-card-body"><div class="tl-card-title">title</div></div>
+                </a>
+            </div>
+
+            <!-- ══ NĂM 2007 ══ -->
+            <div class="year-label"><span>2007</span></div>
+
+            <div class="tl-item right">
+                <div ></div>
+                <div class="tl-date">2/2/2007</div>
+                <div class="tl-connector"></div>
+                <a href="#" class="tl-card">
+                    <div class="tl-card-img">
+                        <span class="img-ph">
+                            <img src="#" />
+                        </span>
+                    </div>
+                    <div class="tl-card-body"><div class="tl-card-title">title</div></div>
+                </a>
+            </div>
+
+            <div class="tl-item left">
+                <div ></div>
+                <div class="tl-date">8/8/2007</div>
+                <div class="tl-connector"></div>
+                <a href="#" class="tl-card">
+                    <div class="tl-card-img">
+                        <span class="img-ph">
+                            <img src="#" />
+                        </span>
+                    </div>
+                    <div class="tl-card-body"><div class="tl-card-title">title</div></div>
+                </a>
+            </div>
+
+        </div><!-- end .timeline -->
+    </main>
+
+    <script>
+    // Hiện card khi scroll đến
+    const items = document.querySelectorAll('.tl-item');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    items.forEach(item => observer.observe(item));
+    </script>
+
+</body>
+</html>
