@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Life — Huỳnh Hữu Phát</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .icon { height: 30px; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #f9f7f4; --surface: #ffffff; --border: #e8e2db;
+            --text: #2e2a26; --muted: #9a9289; --accent: #b8a99a;
+            --nav-bg: #e8e2db; --nav-hover: #ddd6cc; --card-bg: #eee8e0; --avatar-bg: #c9bfb4;
+        }
+        body { font-family: Arial, sans-serif; font-weight: 300; background: var(--bg); color: var(--text); min-height: 100vh; }
+        header { background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 1rem; padding: 0.85rem 2.5rem; }
+        .logo-box { background: var(--card-bg); color: var(--text); font-family: 'Bodoni MT', 'Times New Roman', serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.12em; padding: 0.4rem 1.2rem; border-radius: 4px; text-transform: uppercase; }
+        .icon-pill { background: var(--card-bg); color: var(--muted); font-size: 0.75rem; letter-spacing: 0.08em; padding: 0.4rem 1rem; border-radius: 4px; text-transform: uppercase; }
+        .social-links { margin-left: auto; display: flex; gap: 0.5rem; align-items: center; }
+        .social-links a { display: flex; align-items: center; justify-content: center; transition: background 0.2s; text-decoration: none; }
+        .social-links a:hover { background: var(--nav-hover); }
+        nav { width: 100%; background: var(--nav-bg); border-bottom: 1px solid var(--border); display: flex; justify-content: center; align-items: center; gap: 1rem; }
+        nav > a, .nav-item > span { font-weight: 700; font-family: Arial, sans-serif; display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; font-size: 1rem; letter-spacing: 0.06em; padding: 0.9rem 1.8rem; transition: background 0.15s; cursor: pointer; white-space: nowrap; }
+        nav > a:hover, .nav-item:hover > span { background: var(--nav-hover); }
+        nav > a.active { background: var(--surface); position: relative; }
+        nav > a.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); }
+        .nav-item { position: relative; }
+        .dropdown { display: none; position: absolute; top: 100%; left: 0; background: var(--surface); border: 1px solid var(--border); border-top: none; min-width: 140px; z-index: 100; }
+        .nav-item:hover .dropdown { display: block; }
+        .dropdown a { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.78rem; letter-spacing: 0.04em; padding: 0.55rem 1.2rem; text-decoration: none; transition: background 0.15s, color 0.15s; font-weight: 400; }
+        .dropdown a:hover { background: var(--bg); color: var(--text); }
+        main { max-width: 900px; margin: 0 auto; padding: 3rem 1rem 5rem; }
+        .post { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 2.5rem 3rem; margin-bottom: 3rem; }
+        .post-heading { font-family: 'Times New Roman', serif; font-size: 1.9rem; font-weight: 300; color: var(--text); margin-bottom: 1.6rem; letter-spacing: 0.01em; line-height: 1.3; }
+        .post-cover { width: 100%; aspect-ratio: 16/9; background: var(--card-bg); border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; }
+        .post-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .post-body { font-size: 0.9rem; line-height: 1.95; color: var(--muted); text-align: justify; }
+        .post-body p { margin-bottom: 1.2rem; }
+        .post-body p:last-child { margin-bottom: 0; }
+        .post-body img { max-width: 100%; border-radius: 4px; margin: 1rem 0; }
+        .clearfix::after { content: ''; display: table; clear: both; }
+        .post-date { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.8rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border); }
+        .load-more { text-align: center; }
+        .load-more a { display: inline-block; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 0.6rem 2rem; border-radius: 2px; text-decoration: none; transition: background 0.2s, color 0.2s; }
+        .load-more a:hover { background: var(--card-bg); color: var(--text); }
+        .loading { text-align: center; padding: 3rem; color: var(--muted); font-size: 0.85rem; letter-spacing: 0.08em; }
+        @media (max-width: 640px) {
+            main { padding: 2rem 1rem 4rem; }
+            header { padding: 0.75rem 1rem; }
+            .post { padding: 1.5rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-box">HỮU PHÁT</div>
+    <div class="icon-pill">icon</div>
+    <div class="social-links">
+        <a href="https://facebook.com" target="_blank"><img class="icon" src="icon face.png" /></a>
+        <a href="https://threads.net" target="_blank"><img class="icon" src="Picture1.jpg" /></a>
+        <a href="https://instagram.com" target="_blank"><img class="icon" src="icon ig.png" /></a>
+    </div>
+</header>
+
+<nav>
+    <a href="index.html">Trang chủ</a>
+    <div class="nav-item">
+        <span>Đời sống</span>
+        <div class="dropdown">
+            <a href="Love.html">Love</a>
+            <a href="Friend.html">Friends</a>
+            <a href="Pet.html">Pet</a>
+        </div>
+    </div>
+    <a href="mylife.html" class="active">My life</a>
+    <a href="cocmoc.html">Cột mốc</a>
+</nav>
+
+<main id="posts-container">
+    <div class="loading">Đang tải bài viết...</div>
+</main>
+
+<script>
+const REPO = 'tnkang-205/website-c-nh-n';
+const FOLDER = '_posts/mylife';
+const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/main`;
+const API_BASE = `https://api.github.com/repos/${REPO}/contents/${FOLDER}`;
+
+function parseFrontmatter(text) {
+    const match = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+    if (!match) return { meta: {}, body: text };
+    const meta = {};
+    match[1].split('\n').forEach(line => {
+        const [key, ...val] = line.split(':');
+        if (key) meta[key.trim()] = val.join(':').trim().replace(/^["']|["']$/g, '');
+    });
+    return { meta, body: match[2].trim() };
+}
+
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    if (isNaN(d)) return dateStr;
+    return d.toLocaleDateString('vi-VN', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+function renderPost(meta, bodyHtml) {
+    const coverHtml = meta.cover
+        ? `<img src="${RAW_BASE}/${meta.cover.replace(/^\//,'')}" alt="${meta.title || ''}" style="width:100%;height:100%;object-fit:cover;" />`
+        : '';
+    return `
+    <article class="post">
+        <h1 class="post-heading">${meta.title || 'Bài viết'}</h1>
+        <div class="post-date">${formatDate(meta.date)}</div>
+        <div class="post-cover">${coverHtml}</div>
+        <div class="post-body">${bodyHtml}</div>
+    </article>`;
+}
+
+async function loadPosts() {
+    const container = document.getElementById('posts-container');
+    try {
+        const res = await fetch(API_BASE);
+        if (!res.ok) throw new Error('Không tải được danh sách bài');
+        const files = await res.json();
+        const mdFiles = files.filter(f => f.name.endsWith('.md')).reverse();
+
+        if (mdFiles.length === 0) {
+            container.innerHTML = '<div class="loading">Chưa có bài viết nào.</div>';
+            return;
+        }
+
+        const posts = await Promise.all(mdFiles.map(async f => {
+            const r = await fetch(f.download_url);
+            const text = await r.text();
+            return parseFrontmatter(text);
+        }));
+
+        // Sort by date descending
+        posts.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
+
+        container.innerHTML = posts.map(p => renderPost(p.meta, marked.parse(p.body))).join('');
+    } catch (e) {
+        container.innerHTML = `<div class="loading">Lỗi tải bài viết: ${e.message}</div>`;
+    }
+}
+
+loadPosts();
+</script>
+
+</body>
+</html>
