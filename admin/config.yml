@@ -2,8 +2,6 @@ backend:
   name: github
   repo: tnkang-205/website-c-nh-n
   branch: main
-  base_url: https://beamish-twilight-1d8cbe.netlify.app
-  auth_endpoint: auth
 
 media_folder: "img"
 public_folder: "/img"
