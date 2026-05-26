@@ -1,0 +1,48 @@
+backend:
+  name: github
+  repo: tnkang-205/website-c-nh-n
+  branch: main
+
+media_folder: "img"
+public_folder: "/img"
+
+collections:
+  - name: "mylife"
+    label: "My Life"
+    folder: "_posts/mylife"
+    create: true
+    fields:
+      - {label: "Tiêu đề", name: "title", widget: "string"}
+      - {label: "Ngày đăng", name: "date", widget: "datetime"}
+      - {label: "Ảnh bìa", name: "cover", widget: "image", required: false}
+      - {label: "Nội dung", name: "body", widget: "markdown"}
+
+  - name: "love"
+    label: "Love"
+    folder: "_posts/love"
+    create: true
+    fields:
+      - {label: "Tiêu đề", name: "title", widget: "string"}
+      - {label: "Ngày đăng", name: "date", widget: "datetime"}
+      - {label: "Ảnh", name: "cover", widget: "image", required: false}
+      - {label: "Nội dung", name: "body", widget: "markdown"}
+
+  - name: "friend"
+    label: "Friends"
+    folder: "_posts/friend"
+    create: true
+    fields:
+      - {label: "Tiêu đề", name: "title", widget: "string"}
+      - {label: "Ngày đăng", name: "date", widget: "datetime"}
+      - {label: "Ảnh", name: "cover", widget: "image", required: false}
+      - {label: "Nội dung", name: "body", widget: "markdown"}
+
+  - name: "pet"
+    label: "Pet"
+    folder: "_posts/pet"
+    create: true
+    fields:
+      - {label: "Tiêu đề", name: "title", widget: "string"}
+      - {label: "Ngày đăng", name: "date", widget: "datetime"}
+      - {label: "Ảnh", name: "cover", widget: "image", required: false}
+      - {label: "Nội dung", name: "body", widget: "markdown"}
