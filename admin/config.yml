@@ -7,6 +7,34 @@ media_folder: "img"
 public_folder: "/img"
 
 collections:
+  - name: "trangchu"
+    label: "Trang chủ"
+    files:
+      - name: "trangchu"
+        label: "Nội dung trang chủ"
+        file: "_data/trangchu.md"
+        fields:
+          - {label: "Tên hiển thị", name: "ten", widget: "string", default: "Huỳnh Hữu Phát"}
+          - {label: "Logo (chữ trên header)", name: "logo", widget: "string", default: "HỮU PHÁT"}
+          - {label: "Avatar", name: "avatar", widget: "image", required: false}
+          - {label: "Ảnh chính (About me)", name: "anh_chinh", widget: "image", required: false}
+          - {label: "Tagline", name: "tagline", widget: "string", default: "sống chậm · yêu thương · chia sẻ"}
+          - {label: "Giới thiệu trang web (sidebar)", name: "gioi_thieu", widget: "text"}
+          - {label: "Link Facebook", name: "facebook", widget: "string", required: false}
+          - {label: "Link Threads", name: "threads", widget: "string", required: false}
+          - {label: "Link Instagram", name: "instagram", widget: "string", required: false}
+          - {label: "Nội dung About me", name: "body", widget: "markdown"}
+
+  - name: "cocmoc"
+    label: "Cột mốc"
+    folder: "_posts/cocmoc"
+    create: true
+    fields:
+      - {label: "Tiêu đề sự kiện", name: "title", widget: "string"}
+      - {label: "Ngày / Thời điểm", name: "date", widget: "datetime"}
+      - {label: "Ảnh minh họa", name: "anh", widget: "image", required: false}
+      - {label: "Mô tả", name: "body", widget: "markdown"}
+
   - name: "mylife"
     label: "My Life"
     folder: "_posts/mylife"
