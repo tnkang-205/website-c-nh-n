@@ -115,9 +115,20 @@ async function load(){
         if(body)document.getElementById('about-body').textContent=body;
         if(meta.anh_chinh)document.getElementById('about-photo').innerHTML=`<img src="${RAW}/${meta.anh_chinh.replace(/^\//,'')}" alt="About"/>`;
         if(meta.avatar)document.getElementById('avatar').innerHTML=`<img src="${RAW}/${meta.avatar.replace(/^\//,'')}" alt="Avatar"/>`;
-        if(meta.facebook){document.getElementById('link-facebook').href=meta.facebook;}
-        if(meta.threads){document.getElementById('link-threads').href=meta.threads;}
-        if(meta.instagram){document.getElementById('link-instagram').href=meta.instagram;}
+        if(meta.facebook)document.getElementById('link-facebook').href=meta.facebook;
+        if(meta.threads)document.getElementById('link-threads').href=meta.threads;
+        if(meta.instagram)document.getElementById('link-instagram').href=meta.instagram;
+
+        // ĐOẠN CODE MỚI: Tự động cập nhật Icon trang web (Favicon) từ CMS
+        if(meta.favicon){
+            let link = document.querySelector("link[rel~='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link);
+            }
+            link.href = `${RAW}/${meta.favicon.replace(/^\//,'')}`;
+        }
     }catch(e){}
 }
 load();
