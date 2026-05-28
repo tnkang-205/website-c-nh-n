@@ -15,6 +15,7 @@ collections:
         fields:
           - {label: "Tên hiển thị", name: "ten", widget: "string"}
           - {label: "Logo (chữ trên header)", name: "logo", widget: "string"}
+          - {label: "Icon trang web (Favicon)", name: "favicon", widget: "image", required: false}
           - {label: "Avatar", name: "avatar", widget: "image", required: false}
           - {label: "Ảnh chính (About me)", name: "anh_chinh", widget: "image", required: false}
           - {label: "Tagline", name: "tagline", widget: "string"}
@@ -23,6 +24,28 @@ collections:
           - {label: "Link Threads", name: "threads", widget: "string", required: false}
           - {label: "Link Instagram", name: "instagram", widget: "string", required: false}
           - {label: "Nội dung About me", name: "body", widget: "markdown"}
+
+  - name: "giao_dien_trang"
+    label: "Ảnh bìa 3 trang (Love, Friend, Pet)"
+    files:
+      - name: "page_love"
+        label: "Trang Love"
+        file: "_data/page_love.md"
+        fields:
+          - {label: "Ảnh bìa lớn ở trên (Top Image)", name: "hero_photo", widget: "image", required: false}
+          - {label: "Mô tả của trang", name: "hero_text", widget: "text", required: false}
+      - name: "page_friend"
+        label: "Trang Friends"
+        file: "_data/page_friend.md"
+        fields:
+          - {label: "Ảnh bìa lớn ở trên (Top Image)", name: "hero_photo", widget: "image", required: false}
+          - {label: "Mô tả của trang", name: "hero_text", widget: "text", required: false}
+      - name: "page_pet"
+        label: "Trang Pet"
+        file: "_data/page_pet.md"
+        fields:
+          - {label: "Ảnh bìa lớn ở trên (Top Image)", name: "hero_photo", widget: "image", required: false}
+          - {label: "Mô tả của trang", name: "hero_text", widget: "text", required: false}
 
   - name: "cocmoc"
     label: "Cột mốc"
@@ -45,31 +68,31 @@ collections:
       - {label: "Nội dung", name: "body", widget: "markdown"}
 
   - name: "love"
-    label: "Love"
+    label: "Love (Các bài viết ở dưới)"
     folder: "_posts/love"
     create: true
     fields:
       - {label: "Tiêu đề", name: "title", widget: "string"}
       - {label: "Ngày đăng", name: "date", widget: "datetime"}
-      - {label: "Ảnh", name: "cover", widget: "image", required: false}
+      - {label: "Ảnh bài viết", name: "cover", widget: "image", required: false}
       - {label: "Nội dung", name: "body", widget: "markdown"}
 
   - name: "friend"
-    label: "Friends"
+    label: "Friends (Các bài viết ở dưới)"
     folder: "_posts/friend"
     create: true
     fields:
       - {label: "Tiêu đề", name: "title", widget: "string"}
       - {label: "Ngày đăng", name: "date", widget: "datetime"}
-      - {label: "Ảnh", name: "cover", widget: "image", required: false}
+      - {label: "Ảnh bài viết", name: "cover", widget: "image", required: false}
       - {label: "Nội dung", name: "body", widget: "markdown"}
 
   - name: "pet"
-    label: "Pet"
+    label: "Pet (Các bài viết ở dưới)"
     folder: "_posts/pet"
     create: true
     fields:
       - {label: "Tiêu đề", name: "title", widget: "string"}
       - {label: "Ngày đăng", name: "date", widget: "datetime"}
-      - {label: "Ảnh", name: "cover", widget: "image", required: false}
+      - {label: "Ảnh bài viết", name: "cover", widget: "image", required: false}
       - {label: "Nội dung", name: "body", widget: "markdown"}
