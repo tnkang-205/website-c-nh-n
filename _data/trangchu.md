@@ -1,6 +1,7 @@
 ---
 ten: Huỳnh Hữu Phát
 logo: HỮU PHÁT
+favicon: /img/—pngtree—adobe-design-software-icon-vector_5465097.png
 avatar: /img/chatgpt-image-may-22-2026-01_00_10-am.png
 anh_chinh: /img/ảnh-thẻ.png
 tagline: sống chậm · yêu thương · chia sẻ
