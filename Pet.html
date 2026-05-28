@@ -106,14 +106,35 @@ function formatDate(dateStr) {
 async function loadCards() {
     const grid = document.getElementById('card-grid');
     try {
+        // 1. Tải ảnh bìa lớn cố định ở trên từ file cấu hình riêng
+        try {
+            const resPage = await fetch(`${RAW_BASE}/_data/page_pet.md`);
+            if (resPage.ok) {
+                const { meta: pageMeta } = parseFrontmatter(await resPage.text());
+                if (pageMeta.hero_photo) {
+                    document.getElementById('hero-photo').innerHTML = `<img src="${RAW_BASE}/${pageMeta.hero_photo.replace(/^\//,'')}" alt="Pet" />`;
+                }
+                if (pageMeta.hero_text) {
+                    const txtEl = document.querySelector('.hero-text');
+                    if(txtEl) txtEl.textContent = pageMeta.hero_text;
+                }
+            }
+        } catch(e) {}
+
+        // 2. Tải các bài viết ở dưới
         const res = await fetch(API_BASE);
         if (!res.ok) throw new Error();
         const files = await res.json();
         const mdFiles = files.filter(f => f.name.endsWith('.md'));
         if (!mdFiles.length) { grid.innerHTML = '<div class="loading" style="grid-column:1/-1">Chưa có bài viết nào.</div>'; return; }
+        
         const posts = await Promise.all(mdFiles.map(async f => { const r = await fetch(f.download_url); return parseFrontmatter(await r.text()); }));
         posts.sort((a, b) => new Date(b.meta.date) - new Date(a.meta.date));
-        if (posts[0]?.meta?.cover) document.getElementById('hero-photo').innerHTML = `<img src="${RAW_BASE}/${posts[0].meta.cover.replace(/^\//,'')}" alt="Pet" />`;
+        
+        if (!document.querySelector('#hero-photo img') && posts[0]?.meta?.cover) {
+            document.getElementById('hero-photo').innerHTML = `<img src="${RAW_BASE}/${posts[0].meta.cover.replace(/^\//,'')}" alt="Pet" />`;
+        }
+        
         grid.innerHTML = posts.map(p => `<div class="post-card"><div class="card-image">${p.meta.cover ? `<img src="${RAW_BASE}/${p.meta.cover.replace(/^\//,'')}" alt="${p.meta.title||''}" />` : '<span class="img-placeholder">Hình</span>'}</div><div class="card-body"><div class="card-title">${p.meta.title||'Bài viết'}</div><div class="card-date">${formatDate(p.meta.date)}</div></div></div>`).join('');
     } catch(e) { grid.innerHTML = '<div class="loading" style="grid-column:1/-1">Chưa có bài viết nào.</div>'; }
 }
